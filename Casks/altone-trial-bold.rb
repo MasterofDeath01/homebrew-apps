@@ -1,9 +1,9 @@
 cask "altone-trial-bold" do
   version :latest
-  sha256 :no_check
+  sha256 :9a3762cdde90ab00ca1567258253a479fb7bf893bdbe54b638a6c5c6bf280870
 
-  url "https://drive.usercontent.google.com/download?id=1vC_pDtU0xWuEd4dw8VzcO7Rjt7yureFB&export=download&authuser=0",
-      verified: "drive.google.com/"
+  url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/Altone/Altone-Trial-Bold.ttf",
+      verified: "github.com/MasterofDeath01/homebrew-apps/"
   name "Altone Trial Bold"
   desc "Custom font installed via Homebrew"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
