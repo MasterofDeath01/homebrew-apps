@@ -7,5 +7,5 @@ cask "altone-trial-bold" do
   desc "Custom font installed via Homebrew"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
-  font "Altone Trial-Bold.ttf"
+  font "Altone-Trial-Bold.ttf"
 end
