@@ -1,4 +1,4 @@
-cask "altone-boldt" do
+cask "altone-bold" do
   version "1.0.0"
   sha256 "9a3762cdde90ab00ca1567258253a479fb7bf893bdbe54b638a6c5c6bf280870"
 
