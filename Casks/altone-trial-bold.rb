@@ -1,6 +1,6 @@
 cask "altone-trial-bold" do
-  version :latest
-  sha256 :9a3762cdde90ab00ca1567258253a479fb7bf893bdbe54b638a6c5c6bf280870
+  version :Altone
+  sha256 "9a3762cdde90ab00ca1567258253a479fb7bf893bdbe54b638a6c5c6bf280870"
 
   url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/Altone/Altone-Trial-Bold.ttf",
       verified: "github.com/MasterofDeath01/homebrew-apps/"
