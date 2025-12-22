@@ -12,5 +12,5 @@ cask "adobe-downloader" do
     strategy :github_latest
   end
 
-  app "Adobe.Downloader.app"
+  app "Adobe Downloader.app"
 end
