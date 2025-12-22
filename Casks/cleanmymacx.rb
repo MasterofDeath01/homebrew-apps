@@ -4,7 +4,7 @@ cask "cleanmymacx" do
 
   url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/v#{version}/CleanMyMacX.dmg"
   name "CleanMyMacX"
-  desc "MacOS Cleaner Debloating Tool"
+  desc "Cleaning Debloating Tool"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
   app "CleanMyMac X.app"
