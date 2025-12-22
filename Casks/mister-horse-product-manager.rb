@@ -1,6 +1,6 @@
 cask "mister-horse-product-manager" do
   version :latest
-  sha256 :nocheck
+  sha256 :no_check
 
   url "https://misterhorse.com/downloads/product-manager/osx"
   name "Mister Horse Product Manager"
