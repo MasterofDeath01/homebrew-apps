@@ -7,5 +7,5 @@ cask "topaz-video-enhance-ai" do
   desc "Upscale Video Footage"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
-  app "Topaz Video AI.app"
+  app "Topaz Video.app"
 end
