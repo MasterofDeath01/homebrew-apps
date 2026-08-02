@@ -5,7 +5,7 @@ cask "powerpoint-2024" do
   url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/v#{version}/Microsoft_PowerPoint_Installer_LTSC_2024.pkg"
   name "Microsoft Powerpoint LTSC 2024"
   desc "Microsoft Powerpoint LTSC 2024"
-    homepage "https://github.com/MasterofDeath01/homebrew-apps"
+  homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
   pkg "Microsoft_PowerPoint_Installer_LTSC_2024.pkg"
 
