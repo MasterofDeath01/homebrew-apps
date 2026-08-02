@@ -7,16 +7,11 @@ on:
   pull_request:
 
 jobs:
-  test-bot:
-    strategy:
-      matrix:
-        os: [ ubuntu-24.04, macos-15-intel, macos-26 ]
-    runs-on: ${{ matrix.os }}
+  # 1. This new job runs first, fixes the style issues, and saves them
+  fix-style:
+    runs-on: ubuntu-24.04
     permissions:
-      actions: read
-      checks: read
-      contents: write       
-      pull-requests: write
+      contents: write
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -27,15 +22,7 @@ jobs:
       - name: Set up Git User Configuration
         uses: Homebrew/actions/git-user-config@main
 
-      - name: Cache Homebrew Bundler RubyGems
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}   # <--- FIXED TYPO HERE
-          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ matrix.os }}-rubygems-
-
       - name: Auto-fix Homebrew style issues
-        if: matrix.os == 'ubuntu-24.04'
         run: |
           brew style --fix masterofdeath01/apps
           if [ -n "$(git status --porcelain)" ]; then
@@ -44,11 +31,36 @@ jobs:
           fi
 
       - name: Push Auto-fixes Natively
-        if: matrix.os == 'ubuntu-24.04'
         uses: Homebrew/actions/git-try-push@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
+
+  # 2. This job runs your tests only AFTER the fixes are pushed
+  test-bot:
+    needs: fix-style  # <--- Forces tests to wait until the code is fixed!
+    strategy:
+      matrix:
+        os: [ ubuntu-24.04, macos-15-intel, macos-26 ]
+    runs-on: ${{ matrix.os }}
+    permissions:
+      actions: read
+      checks: read
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache Homebrew Bundler RubyGems
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ matrix.os }}-rubygems-
 
       - run: brew test-bot --only-cleanup-before
 
