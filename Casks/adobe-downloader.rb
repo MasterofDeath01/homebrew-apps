@@ -7,6 +7,8 @@ cask "adobe-downloader" do
   desc "Downloader for Adobe apps"
   homepage "https://github.com/X1a0He/Adobe-Downloader"
 
+  depends_on :macos
+  
   livecheck do
     url :url
     strategy :github_latest
