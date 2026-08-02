@@ -30,7 +30,7 @@ jobs:
       - name: Cache Homebrew Bundler RubyGems
         uses: actions/cache@v4
         with:
-          path: ${{ steps.steps.set-up-homebrew.outputs.gems-path }}
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}   # <--- FIXED TYPO HERE
           key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ matrix.os }}-rubygems-
 
