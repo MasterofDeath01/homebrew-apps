@@ -39,7 +39,7 @@ jobs:
           fi
 
           if [ -n "$(git status --porcelain)" ]; then
-            git add Casks Formula
+            git add -A -- Casks
             git commit -m "Fix Homebrew style"
             git push origin HEAD:main
           else
