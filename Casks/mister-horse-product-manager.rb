@@ -7,5 +7,7 @@ cask "mister-horse-product-manager" do
   desc "Adobe Extension"
   homepage "https://misterhorse.com/"
 
+  depends_on :macos
+
   app "Mister Horse Product Manager.app"
 end

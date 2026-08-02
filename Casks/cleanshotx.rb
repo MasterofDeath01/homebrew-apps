@@ -7,5 +7,7 @@ cask "cleanshotx" do
   desc "Screenshot Tool by MacPaw"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
+  depends_on :macos
+
   app "CleanShot X.app"
 end

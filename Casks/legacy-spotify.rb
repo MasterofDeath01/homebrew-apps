@@ -4,8 +4,10 @@ cask "legacy-spotify" do
 
   url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/v#{version}/spotify-1-2-61-443.dmg"
   name "Legacy Spotify"
-  desc "spotify-1-2-61-443"
+  desc "Spotify-1-2-61-443"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
+
+  depends_on :macos
 
   app "Spotify.app"
 end

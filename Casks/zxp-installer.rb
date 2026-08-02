@@ -7,5 +7,7 @@ cask "zxp-installer" do
   desc "Installs ZXP Files for Adobe apps"
   homepage "https://updates.aescripts.com/zxp-installer"
 
+  depends_on :macos
+
   app "ZXP Installer.app"
 end

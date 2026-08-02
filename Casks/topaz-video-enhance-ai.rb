@@ -7,5 +7,7 @@ cask "topaz-video-enhance-ai" do
   desc "Upscale Video Footage"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
+  depends_on :macos
+
   app "Topaz Video.app"
 end

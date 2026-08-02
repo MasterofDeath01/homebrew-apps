@@ -7,5 +7,7 @@ cask "cleanmymacx" do
   desc "Cleaning Debloating Tool"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
+  depends_on :macos
+
   app "CleanMyMac X.app"
 end

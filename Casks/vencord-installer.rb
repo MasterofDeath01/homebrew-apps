@@ -7,5 +7,7 @@ cask "vencord-installer" do
   desc "Vencord for discord"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
+  depends_on :macos
+
   app "VencordInstaller.app"
 end
