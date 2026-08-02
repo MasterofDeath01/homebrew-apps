@@ -16,7 +16,7 @@ jobs:
       actions: read
       checks: read
       contents: write       
-      pull-requests: read
+      pull-requests: write
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -24,30 +24,31 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout repository branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
-          persist-credentials: false
+      - name: Set up Git User Configuration
+        uses: Homebrew/actions/git-user-config@main
 
       - name: Cache Homebrew Bundler RubyGems
         uses: actions/cache@v4
         with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          path: ${{ steps.steps.set-up-homebrew.outputs.gems-path }}
           key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ matrix.os }}-rubygems-
 
       - name: Auto-fix Homebrew style issues
         if: matrix.os == 'ubuntu-24.04'
-        run: brew style --fix masterofdeath01/apps
+        run: |
+          brew style --fix masterofdeath01/apps
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Auto-fix Homebrew styling issues"
+          fi
 
-      - name: Commit and push style fixes back to GitHub
+      - name: Push Auto-fixes Natively
         if: matrix.os == 'ubuntu-24.04'
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: Homebrew/actions/git-try-push@main
         with:
-          commit_message: "Auto-fix Homebrew styling issues"
-          repository: .
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
 
       - run: brew test-bot --only-cleanup-before
 
