@@ -9,5 +9,5 @@ cask "powerpoint-2024" do
 
   pkg "Microsoft_PowerPoint_Installer_LTSC_2024.pkg"
 
-  uninstall pkgutil: "com.microsoft.package.Microsoft_PowerPoint.app"
+  uninstall pkgutil: 'com.microsoft.package.Microsoft_PowerPoint.app'
 end
