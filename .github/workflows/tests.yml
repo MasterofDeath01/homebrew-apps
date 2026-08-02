@@ -7,24 +7,34 @@ on:
   pull_request:
 
 jobs:
-  # 1. This new job runs first, fixes the style issues, and saves them
+  # 1. This job formats and saves styling fixes safely
   fix-style:
     runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
+      # Fixes the HTTP 400 Error by stripping out standard authentication headers
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Fixes the Duplicate Header Error by telling homebrew not to overwrite settings
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          test-bot: false
 
       - name: Set up Git User Configuration
         uses: Homebrew/actions/git-user-config@main
 
       - name: Auto-fix Homebrew style issues
         run: |
-          brew style --fix masterofdeath01/apps
+          if [ -d "Casks" ]; then brew style --fix Casks/; fi
+          if [ -d "Formula" ]; then brew style --fix Formula/; fi
+          
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git commit -m "Auto-fix Homebrew styling issues"
@@ -36,9 +46,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
 
-  # 2. This job runs your tests only AFTER the fixes are pushed
+  # 2. This job executes your actual tests once the files are clean
   test-bot:
-    needs: fix-style  # <--- Forces tests to wait until the code is fixed!
+    needs: fix-style
     strategy:
       matrix:
         os: [ ubuntu-24.04, macos-15-intel, macos-26 ]
