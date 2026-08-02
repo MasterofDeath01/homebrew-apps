@@ -5,7 +5,7 @@ cask "word-2024" do
   url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/v#{version}/Microsoft_Word_Installer_LTSC_2024.pkg"
   name "Microsoft Word LTSC 2024"
   desc "Microsoft Word LTSC 2024"
-    homepage "https://github.com/MasterofDeath01/homebrew-apps"
+  homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
   pkg "Microsoft_Word_Installer_LTSC_2024.pkg"
 
