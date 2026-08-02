@@ -15,7 +15,7 @@ jobs:
     permissions:
       actions: read
       checks: read
-      contents: read
+      contents: write       # <--- CHANGED: Allows GitHub to save the fixes back to your repo
       pull-requests: read
     steps:
       - name: Set up Homebrew
@@ -31,11 +31,24 @@ jobs:
           key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ matrix.os }}-rubygems-
 
+      # === ADDED STAGE: AUTO-FIXING STYLE ERRORS ===
+      - name: Auto-fix Homebrew style issues
+        if: matrix.os == 'ubuntu-24.04'
+        run: brew style --fix masterofdeath01/apps
+
+      - name: Commit and push style fixes back to GitHub
+        if: matrix.os == 'ubuntu-24.04'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-fix Homebrew styling issues"
+      # =============================================
+
       - run: brew test-bot --only-cleanup-before
 
       - run: brew test-bot --only-setup
 
       - run: brew test-bot --only-tap-syntax
+
       - run: brew test-bot --only-formulae
         if: github.event_name == 'pull_request'
 
