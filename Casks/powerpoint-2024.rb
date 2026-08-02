@@ -5,7 +5,7 @@ cask "powerpoint-2024" do
   url "https://github.com{version}/Microsoft_PowerPoint_Installer_LTSC_2024.pkg"
   name "Microsoft PowerPoint LTSC 2024"
   desc "Microsoft PowerPoint LTSC 2024"
-  homepage "https://github.com"
+  homepage "https://github.com/MasterofDeath01/homebrew-apps/"
 
   depends_on macos: :big_sur
 
