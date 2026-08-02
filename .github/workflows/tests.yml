@@ -15,7 +15,7 @@ jobs:
     permissions:
       actions: read
       checks: read
-      contents: write       # <--- CHANGED: Allows GitHub to save the fixes back to your repo
+      contents: write       
       pull-requests: read
     steps:
       - name: Set up Homebrew
@@ -24,6 +24,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # === UPDATED: Tells Git to track the branch correctly ===
+      - name: Checkout repository branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      # =======================================================
+
       - name: Cache Homebrew Bundler RubyGems
         uses: actions/cache@v4
         with:
@@ -31,7 +38,6 @@ jobs:
           key: ${{ matrix.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ matrix.os }}-rubygems-
 
-      # === ADDED STAGE: AUTO-FIXING STYLE ERRORS ===
       - name: Auto-fix Homebrew style issues
         if: matrix.os == 'ubuntu-24.04'
         run: brew style --fix masterofdeath01/apps
@@ -41,7 +47,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-fix Homebrew styling issues"
-      # =============================================
 
       - run: brew test-bot --only-cleanup-before
 
