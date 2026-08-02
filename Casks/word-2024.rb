@@ -1,13 +1,13 @@
 cask "word-2024" do
   version "22.0.0"
-  sha256 "f574b52d7a472ea41cb39092ce709c6110f7e81f2b928f1df6661883f2ec40dc"
+  sha256 "284740a0bf64c744b49cabcf459bfc4a04de34326c8df154ce884e6ed4b4b223"
 
-  url "https://github.com{version}/Microsoft_Word_Installer_LTSC_2024.pkg"
+  url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/v#{version}/Microsoft_Word_Installer_LTSC_2024.pkg"
   name "Microsoft Word LTSC 2024"
   desc "Microsoft Word LTSC 2024"
-  homepage "https://github.com/MasterofDeath01/homebrew-apps/"
+  homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
-  depends_on macos: :big_sur
+  depends_on macos: :sonoma
 
   pkg "Microsoft_Word_Installer_LTSC_2024.pkg"
 
