@@ -41,6 +41,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add -A -- Casks
             git commit -m "Fix Homebrew style"
+            git pull --rebase origin main
             git push origin HEAD:main
           else
             echo "Nothing to fix."
