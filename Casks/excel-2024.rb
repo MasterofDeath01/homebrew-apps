@@ -5,7 +5,7 @@ cask "excel-2024" do
   url "https://github.com/MasterofDeath01/homebrew-apps/releases/download/v#{version}/Microsoft_Excel_Installer_LTSC_2024.pkg"
   name "Microsoft Excel LTSC 2024"
   desc "Microsoft Excel LTSC 2024"
-    homepage "https://github.com/MasterofDeath01/homebrew-apps"
+  homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
   pkg "Microsoft_Excel_Installer_LTSC_2024.pkg"
 
