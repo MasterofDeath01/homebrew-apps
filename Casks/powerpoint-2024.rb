@@ -7,7 +7,7 @@ cask "powerpoint-2024" do
   desc "Microsoft PowerPoint LTSC 2024"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
-  depends_on macos: :big_sur
+  depends_on macos: :sonoma
 
   pkg "Microsoft_PowerPoint_Installer_LTSC_2024.pkg"
 
