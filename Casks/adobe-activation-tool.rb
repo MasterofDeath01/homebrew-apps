@@ -7,5 +7,7 @@ cask "adobe-activation-tool" do
   desc "Downloader for Adobe apps"
   homepage "https://github.com/MasterofDeath01/homebrew-apps"
 
+  depends_on :macos
+
   app "Adobe Activation Tool.app"
 end
