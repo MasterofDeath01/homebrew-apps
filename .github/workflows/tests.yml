@@ -22,23 +22,25 @@ jobs:
         uses: Homebrew/actions/git-user-config@main
 
       - name: Auto-fix Homebrew style issues
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # 1. Run the style fix tool on your directories
-          if [ -d "Casks" ]; then brew style --fix Casks/; fi
-          if [ -d "Formula" ]; then brew style --fix Formula/; fi
-          
-          # 2. Check if any file formatting changed, then commit and push directly
-          if [ -n "$(git status --porcelain)" ]; then
-            git add .
-            git commit -m "Auto-fix Homebrew styling issues"
-            
-            # Explicitly authenticates via token inline to avoid duplicate headers
-            git push https://x-access-token:${GH_TOKEN}@://github.com{{ github.repository }}.git HEAD:main
-          else
-            echo "No style issues found or files already clean!"
-          fi
+  env:
+    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: |
+    # Ensure repo is checked out and safe
+    git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+    if [ -d "Casks" ]; then brew style --fix Casks/; fi
+    if [ -d "Formula" ]; then brew style --fix Formula/; fi
+
+    if [ -n "$(git status --porcelain)" ]; then
+      git add .
+      git commit -m "Auto-fix Homebrew styling issues"
+
+      # Authenticate and push
+      git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+      git push origin HEAD:main
+    else
+      echo "No style issues found or files already clean!"
+    fi
 
   test-bot:
     needs: fix-style
